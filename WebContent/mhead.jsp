@@ -26,6 +26,7 @@
 <li><a href="index.jsp" class="home">首页</a></li>
 <li style="float:right;"><a href="login.jsp" class="login">登录</a></li>
 <li style="float:right;"><a HREF="register.jsp"class="register">注册</a></li>
-<li style="float:right;"><a href="#">欢迎来到Icart外设商城，${msg }请登录</a></li>
+<li style="float:right;"><a href="#">欢迎来到Icart外设商城，${msg }
+<c:if test="${msg==null}">请登录</c:if></a></li>
 </c:if>   
 </ul>
