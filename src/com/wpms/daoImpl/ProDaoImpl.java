@@ -111,13 +111,12 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into product(pro_name,pro_price,pro_class,pro_firm,pro_count,pro_pic) values(?,?,?,?,?,?)");
+					"insert into product(pro_name,pro_price,pro_class,pro_firm,pro_count) values(?,?,?,?,?)");
 			ps.setString(1, project.getProname());
 			ps.setDouble(2, project.getProprice());
 			ps.setString(3, project.getProclass());
 			ps.setString(4, project.getProfirm());
 			ps.setInt(5, project.getProcount());
-			ps.setString(6, project.getPropic());
 
 			i = ps.executeUpdate();
 		} catch (SQLException e) {

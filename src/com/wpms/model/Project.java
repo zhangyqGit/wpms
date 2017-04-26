@@ -8,7 +8,6 @@ public class Project {
 	private String proclass;
 	private String profirm;
 	private String proremark;
-	private String propic;
 	private Integer buycount;
 
 	public Project(Integer proid, Integer procount, String proname, double proprice, String proclass, String profirm) {
@@ -57,14 +56,13 @@ public class Project {
 		this.profirm = profirm;
 	}
 
-	public Project(Integer procount, double proprice, String proname, String proclass, String profirm, String propic) {
+	public Project(Integer procount, double proprice, String proname, String proclass, String profirm) {
 		super();
 		this.procount = procount;
 		this.proname = proname;
 		this.proprice = proprice;
 		this.proclass = proclass;
 		this.profirm = profirm;
-		this.propic = propic;
 	}
 
 	public Integer getProid() {
@@ -113,14 +111,6 @@ public class Project {
 
 	public void setProfirm(String profirm) {
 		this.profirm = profirm;
-	}
-
-	public String getPropic() {
-		return propic;
-	}
-
-	public void setPropic(String propic) {
-		this.propic = propic;
 	}
 
 	public String getProremark() {
