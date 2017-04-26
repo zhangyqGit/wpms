@@ -18,7 +18,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into orderlist(user_id,order_count,order_money,buy_time) values(?,?,?,?)");
+					"insert into wpms_order(user_id,order_count,order_money,buy_time) values(?,?,?,?)");
 			ps.setInt(1, order.getUserid());
 			ps.setInt(2, order.getOrdercount());
 			ps.setDouble(3, order.getOrdermoney());
@@ -40,7 +40,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into orderdetail(pro_name,order_id,od_count) values(?,(select max(order_id) from orderlist),?)");
+					"insert into wpms_orddtl(pro_name,order_id,od_count) values(?,(select max(order_id) from orderlist),?)");
 			ps.setString(1, detail.getProname());
 			ps.setInt(2, detail.getOrdercount());
 			ps.executeUpdate();
@@ -57,7 +57,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		List<Order> list = null;
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from orderlist where user_id=?");
+			ps = con.prepareStatement("select * from wpms_order where user_id=?");
 			ps.setInt(1, uid);
 			rs = ps.executeQuery();
 			if (rs != null) {
@@ -84,7 +84,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		Order order = null;
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from orderlist where order_id=(select max(order_id) from orderlist)");
+			ps = con.prepareStatement("select * from wpms_order where order_id=(select max(order_id) from wpms_order)");
 			rs = ps.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
@@ -108,7 +108,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		List<OrderDetail> list = new ArrayList<OrderDetail>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from orderdetail where order_id=?");
+			ps = con.prepareStatement("select * from wpms_orddtl where order_id=?");
 			ps.setInt(1, oid);
 			rs = ps.executeQuery();
 			if (rs != null) {
@@ -132,7 +132,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		List<Order> list = new ArrayList<Order>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from orderlist");
+			ps = con.prepareStatement("select * from wpms_order");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer orderid = rs.getInt("order_id");
@@ -155,7 +155,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("delete from orderlist where order_id=?");
+			ps = con.prepareStatement("delete from wpms_order where order_id=?");
 			ps.setInt(1, oid);
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -169,7 +169,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 	public void updProcount(String proname, int count) {
 		openConnection();
 		try {
-			ps = con.prepareStatement("update product set pro_count=pro_count+? where pro_name=?");
+			ps = con.prepareStatement("update wpms_pro set pro_count=pro_count+? where pro_name=?");
 			ps.setInt(1, count);
 			ps.setString(2, proname);
 			ps.executeUpdate();

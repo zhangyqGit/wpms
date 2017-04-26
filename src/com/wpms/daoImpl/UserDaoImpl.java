@@ -14,7 +14,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		User user = null;
 		try {
 			openConnection();
-			ps = con.prepareStatement("select * from user where user_name=? and user_pwd=?");
+			ps = con.prepareStatement("select * from wpms_user where user_name=? and user_pwd=?");
 			ps.setString(1, uname);
 			ps.setString(2, upwd);
 			if (ps != null) {
@@ -45,7 +45,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		boolean result = false;
 		openConnection();
 		try {
-			ps = con.prepareStatement("select id from user where user_name=?");
+			ps = con.prepareStatement("select id from wpms_user where user_name=?");
 			ps.setString(1, uname);
 			rs = ps.executeQuery();
 			if (rs != null) {
@@ -66,7 +66,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into user(user_name,user_pwd,user_role,user_sex,user_mail) values(?,?,?,?,?)");
+					"insert into wpms_user(user_name,user_pwd,user_role,user_sex,user_mail) values(?,?,?,?,?)");
 			ps.setString(1, uname);
 			ps.setString(2, upwd);
 			ps.setString(3, urole);
@@ -86,7 +86,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("update user set user_name=?,user_pwd=?,user_sex=?,user_mail=? where id=?");
+			ps = con.prepareStatement("update wpms_user set user_name=?,user_pwd=?,user_sex=?,user_mail=? where id=?");
 			ps.setString(1, uname);
 			ps.setString(2, upwd);
 			ps.setString(3, usex);
@@ -106,7 +106,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		List<User> userlist = new ArrayList<User>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from user where user_role=?");
+			ps = con.prepareStatement("select * from wpms_user where user_role=?");
 			ps.setString(1, urole);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -131,7 +131,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("delete from user where id=?");
+			ps = con.prepareStatement("delete from wpms_user where id=?");
 			ps.setInt(1, Integer.parseInt(uid));
 			i = ps.executeUpdate();
 
@@ -147,7 +147,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		User user = null;
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from user where id=?");
+			ps = con.prepareStatement("select * from wpms_user where id=?");
 			ps.setInt(1, Integer.parseInt(uid));
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -171,7 +171,7 @@ public class UserDaoImpl extends ConnectionUtil implements UserDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("update user set user_account=user_account+? where id=? ");
+			ps = con.prepareStatement("update wpms_user set user_account=user_account+? where id=? ");
 			ps.setDouble(1, money);
 			ps.setInt(2, userid);
 			i = ps.executeUpdate();

@@ -22,7 +22,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		list = new ArrayList<Project>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from product");
+			ps = con.prepareStatement("select * from wpms_pro");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer proid = rs.getInt("pro_id");
@@ -46,7 +46,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		Project project = null;
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from product where pro_id=?");
+			ps = con.prepareStatement("select * from wpms_pro where pro_id=?");
 			ps.setInt(1, Integer.parseInt(proid));
 			rs = ps.executeQuery();
 			if (rs != null) {
@@ -85,7 +85,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"select pro_id,pro_name,pro_price,pro_firm from product where pro_id in(" + strproid + ")");
+					"select pro_id,pro_name,pro_price,pro_firm from wpms_pro where pro_id in(" + strproid + ")");
 			rs = ps.executeQuery();
 			if (rs != null) {
 				prolist = new ArrayList<Project>();
@@ -111,7 +111,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into product(pro_name,pro_price,pro_class,pro_firm,pro_count) values(?,?,?,?,?)");
+					"insert into wpms_pro(pro_name,pro_price,pro_class,pro_firm,pro_count) values(?,?,?,?,?)");
 			ps.setString(1, project.getProname());
 			ps.setDouble(2, project.getProprice());
 			ps.setString(3, project.getProclass());
@@ -131,7 +131,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		List<Project> list = new ArrayList<Project>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from product where pro_class=?");
+			ps = con.prepareStatement("select * from wpms_pro where pro_class=?");
 			ps.setString(1, pclass);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -167,7 +167,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"select pro_id,pro_name,pro_price,pro_firm from product where pro_id in(" + strproid + ")");
+					"select pro_id,pro_name,pro_price,pro_firm from wpms_pro where pro_id in(" + strproid + ")");
 			rs = ps.executeQuery();
 			if (rs != null) {
 				prolist = new ArrayList<Project>();
@@ -192,7 +192,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("delete from product where pro_id=?");
+			ps = con.prepareStatement("delete from wpms_pro where pro_id=?");
 			ps.setInt(1, Integer.parseInt(pid));
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -208,7 +208,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"update product set pro_name=?,pro_price=?,pro_class=?,pro_firm=?,pro_count=? where pro_id=?");
+					"update wpms_pro set pro_name=?,pro_price=?,pro_class=?,pro_firm=?,pro_count=? where pro_id=?");
 			ps.setString(1, pro.getProname());
 			ps.setDouble(2, pro.getProprice());
 			ps.setString(3, pro.getProclass());
@@ -228,7 +228,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		openConnection();
 		Map<Integer, Integer >procar = new HashMap<Integer,Integer>();
 		try {
-			ps = con.prepareStatement("select * from buycar where user_id = ?");
+			ps = con.prepareStatement("select * from wpms_car where user_id = ?");
 			ps.setInt(1, userid);
 			ps.executeQuery();
 			while(rs.next()){

@@ -15,7 +15,7 @@ public class CommentDaoImpl extends ConnectionUtil implements CommentDao {
 		List<Comment> list = new ArrayList<Comment>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from comment where pro_id=?");
+			ps = con.prepareStatement("select * from wpms_com where pro_id=?");
 			ps.setInt(1, proid);
 			rs = ps.executeQuery();
 			if (rs != null) {
@@ -39,7 +39,7 @@ public class CommentDaoImpl extends ConnectionUtil implements CommentDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("insert into comment(pro_id,user_id,pro_name,user_name,com_item) values(?,?,?,?,?)");
+			ps = con.prepareStatement("insert into wpms_com(pro_id,user_id,pro_name,user_name,com_item) values(?,?,?,?,?)");
 			ps.setInt(1, comment.getProid());
 			ps.setInt(2, comment.getUserid());
 			ps.setString(3, comment.getProname());
@@ -59,7 +59,7 @@ public class CommentDaoImpl extends ConnectionUtil implements CommentDao {
 		List<Comment> list = new ArrayList<Comment>();
 		openConnection();
 		try {
-			ps = con.prepareStatement("select * from comment");
+			ps = con.prepareStatement("select * from wpms_com");
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer comid = rs.getInt("com_id");
@@ -83,7 +83,7 @@ public class CommentDaoImpl extends ConnectionUtil implements CommentDao {
 		int i = 0;
 		openConnection();
 		try {
-			ps = con.prepareStatement("delete from comment where com_id=?");
+			ps = con.prepareStatement("delete from wpms_com where com_id=?");
 			ps.setInt(1, comid);
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -99,7 +99,7 @@ public class CommentDaoImpl extends ConnectionUtil implements CommentDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"select * from orderdetail where order_id in(select order_id from orderlist where user_id=?) and pro_name=?");
+					"select * from wpms_orddtl where order_id in(select order_id from wpms_order where user_id=?) and pro_name=?");
 			ps.setInt(1, userid);
 			ps.setString(2, proname);
 			rs = ps.executeQuery();
