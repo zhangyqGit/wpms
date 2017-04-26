@@ -51,7 +51,7 @@ public class ProAddServlet extends HttpServlet {
 //			for (int i = 0; i < size; i++) {
 //				bytesPic[i] = file.getBinaryData(i);
 //			}
-			Project project = new Project(pcount, pprice, pname, pclass, pfirm, file.getFileName());
+			Project project = new Project(pcount, pprice, pname, pclass, pfirm);
 			int i = service.addPro(project);
 			if (i > 0) {
 				msg = "Ìí¼Ó³É¹¦";
