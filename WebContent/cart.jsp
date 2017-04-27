@@ -82,11 +82,7 @@
     <div class="buttons">
 
       <div class="right"><input type="submit" value="生成订单" class="sub_buttons"></div>
-      <div class="center"><a href="ProListServlet?proclass=鼠标" class="button" style="width:120px;"><span><c:if test="${list == null }">Go Shopping!</c:if><c:if test="${list != null }">继续购物</c:if></span></a>
-      <c:if test="${list != null }">
-      <a href="ProCarServlet?empty=empty" class="button" style="width:120px;"><span>清空购物车</span></a>
-      </c:if>
-      </div>
+      <div class="center"><a href="ProListServlet?proclass=鼠标" class="button" style="width:120px;"><span>Go Shopping!</span></a></div>
     </div>
 </div>
 </form>

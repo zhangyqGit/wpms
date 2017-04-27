@@ -40,7 +40,7 @@ public class OrderDaoImpl extends ConnectionUtil implements OrderDao {
 		openConnection();
 		try {
 			ps = con.prepareStatement(
-					"insert into wpms_orddtl(pro_name,order_id,od_count) values(?,(select max(order_id) from wpms_order),?)");
+					"insert into wpms_orddtl(pro_name,order_id,od_count) values(?,(select max(order_id) from orderlist),?)");
 			ps.setString(1, detail.getProname());
 			ps.setInt(2, detail.getOrdercount());
 			ps.executeUpdate();

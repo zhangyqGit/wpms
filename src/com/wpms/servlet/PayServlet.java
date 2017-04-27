@@ -57,7 +57,6 @@ public class PayServlet extends HttpServlet {
 					User newuser = userservice.login(user.getUsername(), user.getUserpwd());
 					request.getSession().setAttribute("user", newuser);
 					request.getSession().removeAttribute("procar");
-					pservice.emptyCar(user.getUserid());
 					request.setAttribute("ord", order);
 					request.setAttribute("mesg", msg);
 					request.getRequestDispatcher("payresult.jsp").forward(request, response);

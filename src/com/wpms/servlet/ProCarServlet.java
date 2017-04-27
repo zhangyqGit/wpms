@@ -26,47 +26,43 @@ public class ProCarServlet extends HttpServlet {
 			String proid = request.getParameter("proid");
 			User user = (User) request.getSession().getAttribute("user");
 			Object obj = request.getSession().getAttribute("procar");
+			Map<Integer, Integer> mycar = service.queryCar(user.getUserid());
 			Map<Integer, Integer> procar;
-			String empty = request.getParameter("empty");
-			if ("empty".equals(empty)) {
-				service.emptyCar(user.getUserid());
-				request.getSession().removeAttribute("procar");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
-			} else {
-				if (user.getUserrole().equals(RoleCheck.OrdinaryUser)) {
-					if (obj == null) {
-						Map<Integer, Integer> mycar = service.queryCar(user.getUserid());
-						if (mycar == null) {
-							procar = new HashMap<Integer, Integer>();
-						} else {
-							procar = mycar;
-						}
-						request.getSession().setAttribute("procar", procar);
+			if (user.getUserrole().equals(RoleCheck.OrdinaryUser)) {
+				if (obj == null) {
+					if (mycar == null) {
+						procar = new HashMap<Integer, Integer>();
 					} else {
-						procar = (Map<Integer, Integer>) obj;
+						procar = mycar;
 					}
-					if (proid != null) {
-						Integer procount = Integer.parseInt(request.getParameter("procount"));
-						if (procar.containsKey(Integer.parseInt(proid))) {
-							procount = procar.get(Integer.parseInt(proid)) + procount;
-							service.uptCarCount(user.getUserid(), proid, procount);
-						} else {
-							service.addToCars(user.getUserid(), proid, procount);
-						}
-						procar.put(Integer.parseInt(proid), procount);
-					}
-					if (procar.size() > 0) {
-						List<Project> list = service.getCars(procar.keySet());
-						for (Project pro : list) {
-							pro.setBuycount(procar.get(pro.getProid()));
-						}
-						request.setAttribute("list", list);
-					}
-					request.getRequestDispatcher("cart.jsp").forward(request, response);
+					request.getSession().setAttribute("procar", procar);
 				} else {
-					request.setAttribute("msg", "管理员不可购买商品！");
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					procar = (Map<Integer, Integer>) obj;
 				}
+				if (proid != null) {
+					Integer procount =  Integer.parseInt(request.getParameter("procount"));
+					for (Integer pid : procar.keySet()) {
+						if (pid == Integer.parseInt(proid)) {
+							procount = procar.get(pid) + procount;
+						}
+					}
+					procar.put(Integer.parseInt(proid), procount);
+				}
+				if (procar.size() > 0) {
+					List<Project> list = service.addCars(procar.keySet());
+					for (Project pro : list) {
+						for (Integer pid : procar.keySet()) {
+							if (pro.getProid() == pid) {
+								pro.setBuycount(procar.get(pid));
+							}
+						}
+					}
+					request.setAttribute("list", list);
+				}
+				request.getRequestDispatcher("cart.jsp").forward(request, response);
+			} else {
+				request.setAttribute("msg", "管理员不可购买商品！");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		} else {
 			request.setAttribute("msg", "登录后才可购买商品！");

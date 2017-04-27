@@ -151,7 +151,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 	}
 
 	@Override
-	public List<Project> getCars(Set<Integer> proids) {
+	public List<Project> addCars(Set<Integer> proids) {
 		String strproid = "";
 		List<Project> prolist = null;
 
@@ -230,7 +230,7 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 		try {
 			ps = con.prepareStatement("select * from wpms_car where user_id = ?");
 			ps.setInt(1, userid);
-			rs = ps.executeQuery();
+			ps.executeQuery();
 			while(rs.next()){
 				Integer proid = rs.getInt("pro_id");
 				Integer procount = rs.getInt("pro_count");
@@ -240,65 +240,6 @@ public class ProDaoImpl extends ConnectionUtil implements ProDao {
 			return null;
 		}
 		return procar;
-	}
-
-	@Override
-	public int addToCars(Integer userid,String proid, Integer procount) {
-		openConnection();
-		int i = 0;
-		try {
-			ps = con.prepareStatement("insert into wpms_car(user_id,pro_id,pro_count)values(?,?,?)");
-			ps.setInt(1, userid);
-			ps.setString(2, proid);
-			ps.setInt(3, procount);
-			i = ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return i;
-	}
-
-	@Override
-	public void uptCarCount(Integer userid, String proid, Integer procount) {
-		openConnection();
-		try {
-			ps = con.prepareStatement("update wpms_car set pro_count=? where user_id=? and pro_id = ?");
-			ps.setInt(1, procount);
-			ps.setInt(2, userid);
-			ps.setString(3, proid);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void delFromCar(Integer userid, Integer proid) {
-		openConnection();
-		try {
-			ps = con.prepareStatement("delete from wpms_car where user_id=? and pro_id=?");
-			ps.setInt(1, userid);
-			ps.setInt(2, proid);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void emptyCar(Integer userid) {
-		openConnection();
-		try {
-			ps = con.prepareStatement("delete from wpms_car where user_id=?");
-			ps.setInt(1, userid);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
