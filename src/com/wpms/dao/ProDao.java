@@ -41,7 +41,7 @@ public interface ProDao {
 	 * @param proids 商品ID数组
 	 * 
 	 */
-	List<Project> addCars(Set<Integer> proids);
+	List<Project> getCars(Set<Integer> proids);
 	/**
 	 * 根据商品ID删除商品
 	 * @param pid 商品ID
@@ -54,7 +54,37 @@ public interface ProDao {
 	 * 
 	 */
 	int updPro(Project pro);
-
+	/**
+	 * 根据用户ID得到购物车
+	 * @param userid 用户ID
+	 * 
+	 */
 	Map<Integer, Integer> queryCar(Integer userid);
+	/**
+	 * 将商品添加到购物车
+	 * @param userid 用户ID
+	 * @param proid 商品ID
+	 * @param procount 商品数量
+	 * 
+	 */
+	int addToCars(Integer userid,String proid, Integer procount);
+	/**
+	 * 更新购物车中商品的数量
+	 * @param userid 用户ID
+	 * @param proid 商品ID
+	 * @param procount 商品数量
+ 	 */
+	void uptCarCount(Integer userid, String proid, Integer procount);
+	/**
+	 * 从购物车中删除商品
+	 * @param userid 用户ID
+	 * @param proid 商品ID
+	 */
+	void delFromCar(Integer userid, Integer proid);
+	/**
+	 * 清空购物车
+	 * @param userid
+	 */
+	void emptyCar(Integer userid);
 
 }
