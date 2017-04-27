@@ -1,10 +1,10 @@
 package com.wpms.model;
 
 public class OrderDetail {
-	private Integer odid;
-	private String proname;
-	private Integer orderid;
-	private Integer ordercount;
+	private Integer odid;             	   //订单明细ID
+	private String proname;                //商品名称
+	private Integer orderid;               //订单ID
+	private Integer ordercount;            //订单数量
 
 	public OrderDetail() {
 		super();

@@ -1,14 +1,14 @@
 package com.wpms.model;
 
 public class Project {
-	private Integer proid;
-	private Integer procount;
-	private String proname;
-	private double proprice;
-	private String proclass;
-	private String profirm;
-	private String proremark;
-	private Integer buycount;
+	private Integer proid;                  //商品ID
+	private Integer procount;               //商品数量（库存）
+	private String proname;                 //商品名称
+	private double proprice;                //商品价格
+	private String proclass;                //商品种类
+	private String profirm;                 //商品厂商
+	private String proremark;               //商品描述
+	private Integer buycount;               //购买数量
 
 	public Project(Integer proid, Integer procount, String proname, double proprice, String proclass, String profirm) {
 		super();

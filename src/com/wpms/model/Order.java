@@ -5,12 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-	private Integer orderid;
-	private Integer userid;
-	private Integer ordercount;
-	private Date ordertime;
-	private Double ordermoney;
-	private List<OrderDetail> details;
+	private Integer orderid;              			 //订单ID
+	private Integer userid;               		     //用户ID
+	private Integer ordercount;            		     //订单商品总数
+	private Date ordertime;              	     	 //订单时间
+	private Double ordermoney;            		     //订单总金额
+	private List<OrderDetail> details;               //订单详细内容
 
 	public Order(Integer orderid, Integer ordercount, Double ordermoney) {
 		super();

@@ -1,12 +1,12 @@
 package com.wpms.model;
 
 public class Comment {
-	private Integer comid;
-	private Integer proid;
-	private Integer userid;
-	private String proname;
-	private String username;
-	private String comitem;
+	private Integer comid;               //评论ID
+	private Integer proid;               //商品ID
+	private Integer userid;              //用户ID
+	private String proname;              //商品名称
+	private String username;             //用户名
+	private String comitem;              //评论内容
 
 	public Comment(Integer userid, String username, String comitem) {
 		super();
