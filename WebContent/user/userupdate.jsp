@@ -36,7 +36,7 @@
 </script>
 <body>
 
-<style type="text/css">
+	<style type="text/css">
 /* content */
 #content .content {
 	padding: 10px;
@@ -112,7 +112,7 @@
 					</div>
 					<div id="comment" style="display: none;">
 						<form action="ImgUpdServlet">
-							<input type="file" class="form-control" id="doc" name="propic" style="width:200px"
+							<input type="file" class="form-control" id="doc" name="propic"
 								onchange="setImgPreview()">
 							<p>
 							<div id="LocalImg" style="margin-left: 40px;margin-top: 10px;">
