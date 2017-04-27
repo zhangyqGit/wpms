@@ -43,8 +43,8 @@ public class ProServiceImpl implements ProService {
 	}
 
 	@Override
-	public List<Project> addCars(Set<Integer> proids) {
-		return dao.addCars(proids);
+	public List<Project> getCars(Set<Integer> proids) {
+		return dao.getCars(proids);
 
 	}
 
@@ -62,6 +62,26 @@ public class ProServiceImpl implements ProService {
 	@Override
 	public Map<Integer, Integer> queryCar(Integer userid) {
 		return dao.queryCar(userid);
+	}
+
+	@Override
+	public int addToCars(Integer userid,String proid, Integer procount) {
+		return dao.addToCars(userid,proid,procount);
+	}
+
+	@Override
+	public void uptCarCount(Integer userid, String proid, Integer procount) {
+		 dao.uptCarCount(userid,proid,procount);
+	}
+
+	@Override
+	public void delFromCar(Integer userid, Integer proid) {
+		dao.delFromCar(userid,proid);
+	}
+
+	@Override
+	public void emptyCar(Integer userid) {
+		dao.emptyCar(userid);
 	}
 
 }

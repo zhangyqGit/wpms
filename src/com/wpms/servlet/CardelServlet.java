@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wpms.model.Project;
+import com.wpms.model.User;
 import com.wpms.service.ProService;
 import com.wpms.serviceImpl.ProServiceImpl;
 
@@ -20,21 +21,19 @@ public class CardelServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Map<Integer, Integer> procar = (Map<Integer, Integer>) request.getSession().getAttribute("procar");
 		String idString = request.getParameter("proid");
+		User user = (User) request.getSession().getAttribute("user");
 		String urlPath = "cart.jsp";
 		Integer proid = Integer.parseInt(idString);
 		ProService service = new ProServiceImpl();
 		if (procar.size() > 0) {
 			procar.remove(proid);
+			service.delFromCar(user.getUserid(), proid);
 			if (procar.size() == 0) {
 				urlPath = "index.jsp";
 			} else {
 				List<Project> list = service.getPros(procar.keySet());
 				for (Project pro : list) {
-					for (Integer pid : procar.keySet()) {
-						if (pro.getProid() == pid) {
-							pro.setBuycount(procar.get(pid));
-						}
-					}
+					pro.setBuycount(procar.get(pro.getProid()));
 				}
 				request.setAttribute("list", list);
 			}
